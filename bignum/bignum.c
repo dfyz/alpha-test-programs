@@ -1,5 +1,7 @@
 #include "bignum.h"
 
+#include <string.h>
+
 struct bignum {
   size_t size;
   digit_t digits[];

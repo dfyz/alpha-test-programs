@@ -1,2 +1,2 @@
-all: fib.o main.o
+SOURCES=fib.c main.c
 include ../config.mk

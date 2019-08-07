@@ -1,6 +1,5 @@
 #include <stddef.h>
-
-int printf(const char*, ...);
+#include <stdio.h>
 
 struct Point {
   double x;

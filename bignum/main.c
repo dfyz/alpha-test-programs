@@ -1,5 +1,6 @@
-#include "defs.h"
 #include "bignum.h"
+
+#include <stdio.h>
 
 size_t MAX_DIGITS = 1 << 16;
 

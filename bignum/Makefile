@@ -1,3 +1,3 @@
-all: bignum.o main.o
+SOURCES=bignum.c main.c
 include ../config.mk
 

@@ -1,2 +1,2 @@
-all: main.o
+SOURCES=main.c
 include ../config.mk
