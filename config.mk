@@ -2,7 +2,7 @@ OBJECTS=$(SOURCES:.c=.o)
 
 CC=~/llvm-build/bin/clang
 WARN_OPTS=-Wall -pedantic
-FLAGS=-O2 -std=c11 -g
+FLAGS=-O2 -std=c11 -g -mcpu=ev67
 PLATFORM_FLAGS=--target=alpha-linux-gnu --sysroot=/usr/alpha-linux-gnu
 LLVM_FLAGS=
 CFLAGS=$(WARN_OPTS) $(FLAGS) $(PLATFORM_FLAGS) $(LLVM_FLAGS)
