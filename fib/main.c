@@ -3,10 +3,9 @@
 int fib(int);
 int fib_rec(int);
 
+#define N 40
+
 int main() {
-  int n;
-  if (scanf("%d", &n) == 1) {
-    printf("%d\n", fib(n));
-    printf("%d\n", fib_rec(n));
-  }
+    printf("%d\n", fib(N));
+    printf("%d\n", fib_rec(N));
 }
