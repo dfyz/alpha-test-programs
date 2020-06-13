@@ -1,7 +1,9 @@
+TOPTARGETS := all clean deploy
+
 SUBDIRS := $(wildcard */.)
 
-.PHONY: main $(SUBDIRS)
-main: $(SUBDIRS)
+$(TOPTARGETS): $(SUBDIRS)
+$(SUBDIRS):
+	$(MAKE) -C $@ $(MAKECMDGOALS)
 
-$(SUBDIRS) :
-	$(MAKE) -C $@ clean main
+.PHONY: $(TOPTARGETS) $(SUBDIRS)

@@ -12,11 +12,14 @@ LD=alpha-linux-gnu-gcc-10
 %.o: %.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-.PHONY: main
-main: $(OBJECTS)
-	$(LD) -o main $(OBJECTS) -lm
+.PHONY: all
+all: $(OBJECTS)
+	$(LD) -o $(notdir $(CURDIR)) $(OBJECTS) -lm
 
 .PHONY: clean
 clean:
-	rm -f *.o
+	rm -f *.o $(notdir $(CURDIR))
 
+.PHONY: deploy
+deploy: all
+	scp $(notdir $(CURDIR)) alpha:
