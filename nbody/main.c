@@ -131,7 +131,7 @@ int main(int argc, char ** argv)
 
   offset_momentum(NBODIES, bodies);
   printf ("%.9f\n", energy(NBODIES, bodies));
-  for (i = 1; i <= 50000000; i++)
+  for (i = 1; i <= 500000; i++)
     advance(NBODIES, bodies, 0.01);
   printf ("%.9f\n", energy(NBODIES, bodies));
   return 0;
