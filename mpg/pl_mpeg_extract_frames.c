@@ -46,37 +46,26 @@ Frames are saved as PNG via stb_image_write: https://github.com/nothings/stb
 #include "stb_image_write.h"
 
 int main(int argc, char *argv[]) {
-	if (argc < 2) {
-		printf("Usage: pl_mpeg_extract_frames <file.mpg>\n");
-		return 1;
-	}
-
-	plm_t *plm = plm_create_with_filename(argv[1]);
+	plm_t *plm = plm_create_with_filename("mpg.in");
 	if (!plm) {
-		printf("Couldn't open file");
+		puts("Copy mpg.in to the current directory");
 		return 1;
 	}
 
-	plm_set_audio_enabled(plm, FALSE, 0);
-	
+	plm_set_audio_enabled(plm, FALSE);
+
 	int w = plm_get_width(plm);
 	int h = plm_get_height(plm);
 	uint8_t *rgb_buffer = (uint8_t *)malloc(w * h * 3);
-	
-	char png_name[16];
+
 	plm_frame_t *frame = NULL;
 
-	for (int i = 0; frame = plm_decode_video(plm); i++) {
-		plm_frame_to_rgb(frame, rgb_buffer);
-		
-    if (i == 1000) {
-      sprintf(png_name, "%04d.png", i);
-      printf("Writing %s\n", png_name);
-      stbi_write_png(png_name, w, h, 3, rgb_buffer, w * 3);
-      break;
-    }
+	for (int i = 0; (frame = plm_decode_video(plm)) != NULL; i++) {
+		plm_frame_to_rgb(frame, rgb_buffer, w * 3);
+		if (i == 100) {
+			stbi_write_png("mpg.out", w, h, 3, rgb_buffer, w * 3);
+		}
 	}
-	
-    return 0;
+	return 0;
 }
 
