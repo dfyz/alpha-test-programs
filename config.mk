@@ -1,11 +1,25 @@
 OBJECTS=$(SOURCES:.c=.o)
 
-CC=~/llvm-build/bin/clang
+COMPILER ?= clang
+MODE ?= release
+
+ifeq ($(COMPILER),gcc)
+    CC=alpha-linux-gnu-gcc-10
+    PLATFORM_FLAGS=-mcpu=ev67
+else
+    CC=~/llvm-build/bin/clang
+    PLATFORM_FLAGS=--target=alpha-linux-gnu --sysroot=/usr/alpha-linux-gnu
+endif
+
+ifeq ($(MODE),debug)
+    OPT_FLAGS=-O0
+else
+    OPT_FLAGS=-O2
+endif
+
 WARN_OPTS=-Wall -pedantic
-FLAGS=-O2 -std=c11 -g -mcpu=ev67
-PLATFORM_FLAGS=--target=alpha-linux-gnu --sysroot=/usr/alpha-linux-gnu
-LLVM_FLAGS=
-CFLAGS=$(WARN_OPTS) $(FLAGS) $(PLATFORM_FLAGS) $(LLVM_FLAGS)
+FLAGS=-std=c11 -g
+CFLAGS=$(WARN_OPTS) $(FLAGS) $(OPT_FLAGS) $(PLATFORM_FLAGS)
 
 LD=alpha-linux-gnu-gcc-10
 
