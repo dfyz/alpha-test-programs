@@ -1,3 +1,4 @@
+INPUTS ?=
 OBJECTS=$(SOURCES:.c=.o)
 
 COMPILER ?= clang
@@ -36,4 +37,4 @@ clean:
 
 .PHONY: deploy
 deploy: all
-	scp $(notdir $(CURDIR)) alpha:
+	scp $(notdir $(CURDIR)) $(INPUTS) alpha:
